@@ -11,8 +11,7 @@
     "scripts": {
         "test": "",
         "clean": "npx gulp clean",
-        "build": "NODE_OPTIONS='--max_old_space_size=4095' npx gulp build",
-        "prepare": "npm run clean && npm run build"
+        "build": "NODE_OPTIONS='--max_old_space_size=4095' npx gulp build"
     },
     "dependencies": {
         "express": "^4.17.1",
