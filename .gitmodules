@@ -1,0 +1,3 @@
+[submodule "openvscode-server"]
+	path = resources/openvscode-server
+	url = https://github.com/gitpod-io/openvscode-server.git

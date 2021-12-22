@@ -1,0 +1,13 @@
+[Unit]
+Description=OpenVSCode Hub
+After=network.target
+
+[Service]
+RuntimeDirectory=openvscode-hub
+RuntimeDirectoryMode=0777
+PIDFile=
+WorkingDirectory=
+ExecStart=
+
+[Install]
+WantedBy=multi-user.target

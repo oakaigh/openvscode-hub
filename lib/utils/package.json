@@ -1,0 +1,10 @@
+{
+    "name": "utils",
+    "private": true,
+    "files": [
+        "lib",
+        "index.js"
+    ],
+    "main": "index.js",
+    "dependencies": {}
+}
