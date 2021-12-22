@@ -16,15 +16,14 @@ class Tasks extends task.Builder {
                 'LICENSE',
                 '.npmrc',
                 'index.js',
-                'lib/**',
                 'src/**'
-            ], { 
-                cwd: this.source, 
-                cwdbase: true 
+            ], {
+                cwd: this.source,
+                cwdbase: true
             })
                 .pipe(gulp.dest(this.dest)),
             gulp.src(
-                'package.json', 
+                'package.json',
                 { cwd: this.source }
             )
                 .pipe(
@@ -34,7 +33,7 @@ class Tasks extends task.Builder {
                             version: obj.version,
                             license: obj.license,
                             private: obj.private,
-                            files: [ 'lib', 'src' ],
+                            files: [ 'src' ],
                             main: '.',
                             dependencies: obj.dependencies
                         };
@@ -52,7 +51,7 @@ class Tasks extends task.Builder {
             path.resolve(
                 path.format({
                     dir: this.dest,
-                    base: 'src/vs/bin'
+                    base: 'src/bin'
                 })
             )
         );
@@ -64,7 +63,7 @@ class Tasks extends task.Builder {
                 'npm',
                 [ 'install' ],
                 {
-                    cwd: this.dest, 
+                    cwd: this.dest,
                     stdio: 'inherit'
                 }
             );

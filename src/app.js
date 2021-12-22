@@ -6,7 +6,7 @@ const passport = require('passport');
 const passport_pam = require('passport-pam');
 const passport_http = require('passport-http');
 
-const vscode = require('./vs/server');
+const vscode = require('./server');
 
 
 function initialize(app, server, user_options = {}) {
@@ -93,7 +93,7 @@ function initialize(app, server, user_options = {}) {
 
             req.originalUrl = undefined;
 
-            return res.upgrade != undefined 
+            return res.upgrade != undefined
                 ? handler.upgrade(req, res.upgrade.socket, res.upgrade.head)
                 : handler.request(req, res, next);
         }

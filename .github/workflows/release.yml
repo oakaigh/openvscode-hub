@@ -13,9 +13,11 @@ jobs:
       - uses: actions/setup-node@v2
       - run: npm install
       - run: npm run build --production
+      - run: tar -zcvf dist.tar.gz dist
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
           prerelease: false
           files: |
-            dist/*
+            dist.tar.gz

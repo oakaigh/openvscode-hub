@@ -4,7 +4,7 @@ const child_process = require('child_process');
 const express_proxy = require('http-proxy-middleware');
 const userid = require('userid');
 
-const utils = require('utils');
+const utils = require('./utils');
 
 
 const config = {

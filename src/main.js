@@ -6,7 +6,7 @@ const https = require('https');
 const express = require('express');
 const express_vscode = require('./app');
 
-const utils = require('utils');
+const utils = require('./utils');
 
 const url = require('url');
 

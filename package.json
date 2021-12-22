@@ -1,26 +1,28 @@
 {
-    "name": "openvscode-serverhub",
+    "name": "openvscode-hub",
     "version": "0.0.0",
     "license": "MIT",
     "files": [
         "dist"
     ],
     "main": "dist",
+    "bin": "dist",
     "private": true,
     "scripts": {
         "test": "",
-        "build": "NODE_OPTIONS='--max_old_space_size=4095' npx gulp build"
+        "clean": "npx gulp clean",
+        "build": "NODE_OPTIONS='--max_old_space_size=4095' npx gulp build",
+        "prepare": "npm run clean && npm run build"
     },
     "dependencies": {
         "express": "^4.17.1",
         "express-session": "^1.17.2",
-        "express-upgrade": "file:lib/express-upgrade",
+        "express-upgrade": "^0.0.1",
         "http-proxy-middleware": "^2.0.1",
         "passport": "^0.5.0",
         "passport-http": "^0.3.0",
         "passport-pam": "^0.1.4",
         "userid": "^1.2.5",
-        "utils": "file:lib/utils",
         "uuid": "^8.3.2",
         "yargs": "^17.2.1"
     },
