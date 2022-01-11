@@ -43,7 +43,7 @@ function initialize(app, server, user_options = {}) {
         express_session({
             secret: undefined,
             resave: false,
-            saveUninitialized: true,
+            saveUninitialized: false,
             cookie: { secure: true },
             ...options.session
         })
@@ -53,16 +53,30 @@ function initialize(app, server, user_options = {}) {
         passport.session()
     );
 
+    app.use((req, _res, next) => {
+        if (!req.session || !req.session.valid) {
+            if (req.headers && req.headers.authorization) { 
+                delete req.headers.authorization; 
+            }
+            req.session.valid = true;
+        }
+        next();
+    });
+
     app.get(routes.login,
         passport.authenticate('pam', { session: true }),
-        (_req, res, _next) => {
+        (req, res, _next) => {
+            req.session.valid = true;
             return res.redirect(routes.home);
         }
     );
     app.get(routes.logout,
         (req, res, _next) => {
+            req.session.valid = false;
             req.logout();
-            return res.redirect(routes.home);
+            return req.session.destroy(() => {
+                return res.redirect(routes.login);
+            });
         }
     );
     app.use(
