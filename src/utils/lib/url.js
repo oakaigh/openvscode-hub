@@ -5,7 +5,7 @@ const config = {
     resolvers: {
         'file:': async function* (uri, user_options = {}) {
             const fs = require('fs');
-            const fs_util = require('./fs');      
+            const fs_util = require('./fs');
 
             function parse(uri) {
                 if (!uri)
@@ -17,6 +17,7 @@ const config = {
                 enabled: false,
                 poll: false,
                 permissive: false,
+                dereference: false,
                 ...user_options
             };
 
@@ -38,7 +39,12 @@ const config = {
             yield* read();
 
             if (options.poll) {
-                for await (const event of fs_util.watch(parsed.filename, {})) {
+                for await (const event of fs_util.watch(
+                    parsed.filename, {
+                        permissive: options.permissive,
+                        dereference: options.dereference
+                    }
+                )) {
                     switch (event.eventType) {
                         case 'change':
                         case 'rename':

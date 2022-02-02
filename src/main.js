@@ -68,7 +68,8 @@ async function main(user_config) {
                             'file:': {
                                 enabled: true,
                                 poll: true,
-                                permissive: true
+                                permissive: true,
+                                dereference: false
                             }
                         }
                     )) {
@@ -83,7 +84,7 @@ async function main(user_config) {
             sec_context[name] = config[name];
         }
 
-        await Promise.all(promises);
+        return Promise.all(promises);
     }
 
     async function init_listener(server, user_config) {
@@ -94,13 +95,15 @@ async function main(user_config) {
             ...user_config
         };
 
-        await server.listen(config, () => {
+        return server.listen(config, () => {
             console.info('listening on', server.address());
         });
     }
 
-    init_tls(server, config.tls);
-    await init_listener(server, config.listener);
+    await Promise.all([
+        init_tls(server, config.tls),
+        init_listener(server, config.listener)
+    ]);
 };
 
 exports = module.exports = main;

@@ -55,12 +55,12 @@ function initialize(app, server, user_options = {}) {
 
     app.use((req, _res, next) => {
         if (!req.session || !req.session.valid) {
-            if (req.headers && req.headers.authorization) { 
-                delete req.headers.authorization; 
+            if (req.headers && req.headers.authorization) {
+                delete req.headers.authorization;
             }
             req.session.valid = true;
         }
-        next();
+        return next();
     });
 
     app.get(routes.login,
